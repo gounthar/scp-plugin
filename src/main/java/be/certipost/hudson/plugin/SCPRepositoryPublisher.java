@@ -34,6 +34,7 @@ import java.io.StringWriter;
 import java.io.PrintStream;
 import java.lang.Runnable;
 import java.lang.Thread;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -392,7 +393,7 @@ public final class SCPRepositoryPublisher extends Notifier {
                         syncObj.notify();
                     }
                 }
-                writer = new BufferedWriter(new OutputStreamWriter(out));
+                writer = new BufferedWriter(new OutputStreamWriter(out, StandardCharsets.UTF_8));
 
                 strWriter = new StringWriter();
                 strWriter.write("<pre>\n");
