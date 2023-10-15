@@ -13,11 +13,8 @@ import hudson.slaves.NodeProperty;
 import hudson.slaves.NodePropertyDescriptor;
 import hudson.util.DescribableList;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -411,13 +408,15 @@ public class SCPSite extends AbstractDescribableImpl<SCPSite> {
             }
             SCPSite site = new SCPSite("", hostname, port, username, password, keyfile, "");
             try {
-                Session session = site.createSession(new PrintStream(
-                        System.out));
+                Session session = site.createSession(new PrintStream(System.out, true, StandardCharsets.UTF_8.name()));
                 site.closeSession(new PrintStream(System.out), session,
                         null);
             } catch (JSchException e) {
                 LOGGER.log(Level.SEVERE, e.getMessage(), e);
                 return FormValidation.error(e,Messages.SCPRepositoryPublisher_NotConnect());
+            } catch (UnsupportedEncodingException e) {
+                LOGGER.log(Level.SEVERE, e.getMessage(), e);
+                throw new RuntimeException(e);
             }
             return FormValidation.ok("Success!");
         }
