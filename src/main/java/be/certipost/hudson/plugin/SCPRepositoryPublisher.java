@@ -362,8 +362,6 @@ public final class SCPRepositoryPublisher extends Notifier {
         private final PrintStream logger;
         private final Object syncObj;
 
-        boolean consoleLogCreated = false;
-
         consoleRunnable(AbstractBuild build, SCPSite scpsite, String path, PrintStream logger, Object syncObj) {
             this.build = build;
             this.scpsite = scpsite;
