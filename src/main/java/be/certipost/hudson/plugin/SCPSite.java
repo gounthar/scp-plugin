@@ -354,8 +354,9 @@ public class SCPSite extends AbstractDescribableImpl<SCPSite> {
             FilePath filePath, PrintStream logger) {
         String strRet = "";
         String strFilePath = "";
-        if(filePath.getParent() != null) {
-            strFilePath = filePath.getParent().toString();
+        FilePath parent = filePath.getParent();
+        if (parent != null) {
+            strFilePath = parent.toString();
         }
         if (strWorkspacePath.length() == strFilePath.length()) {
             return "";
