@@ -276,7 +276,7 @@ public class SCPSite extends AbstractDescribableImpl<SCPSite> {
     private void mkdirs(String filePath, PrintStream logger, ChannelSftp channel)
             throws SftpException, IOException {
         String pathnames[] = filePath.split("/");
-        String curdir = rootRepositoryPath;
+        StringBuilder curdir = new StringBuilder(rootRepositoryPath);
         if (pathnames != null) {
             for (int i = 0; i < pathnames.length; i++) {
                 if (pathnames[i].length() == 0) {
@@ -314,7 +314,7 @@ public class SCPSite extends AbstractDescribableImpl<SCPSite> {
                     throw new IOException(curdir + "/" + pathnames[i]
                                           + " is not a directory:" + dirstat);
                 }
-                curdir = curdir + "/" + pathnames[i];
+                curdir.append("/").append(pathnames[i]);
             }
         }
     }
