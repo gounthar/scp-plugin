@@ -353,7 +353,10 @@ public class SCPSite extends AbstractDescribableImpl<SCPSite> {
     private String extractRelativePath(String strWorkspacePath,
             FilePath filePath, PrintStream logger) {
         String strRet = "";
-        String strFilePath = filePath.getParent().toString();
+        String strFilePath = "";
+        if(filePath.getParent() != null) {
+            strFilePath = filePath.getParent().toString();
+        }
         if (strWorkspacePath.length() == strFilePath.length()) {
             return "";
         }
