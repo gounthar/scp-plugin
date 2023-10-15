@@ -129,12 +129,23 @@ public final class SCPRepositoryPublisher extends Notifier {
     }
 
     private static DescribableList<NodeProperty<?>, NodePropertyDescriptor> getNodeProperties() {
-        Node node = Computer.currentComputer().getNode();
-        DescribableList<NodeProperty<?>, NodePropertyDescriptor> nodeProperties = node
-                .getNodeProperties();
+        Computer currentComputer = Computer.currentComputer();
+        if (currentComputer == null) {
+            throw new IllegalStateException("No current computer. This is like a detective without a case.");
+        }
 
-        if (Computer.currentComputer() instanceof MasterComputer) {
+        Node node = currentComputer.getNode();
+        if (node == null) {
+            throw new IllegalStateException("No node. It's like a gun without bullets.");
+        }
+
+        DescribableList<NodeProperty<?>, NodePropertyDescriptor> nodeProperties = node.getNodeProperties();
+
+        if (currentComputer instanceof MasterComputer) {
             Hudson instance = Hudson.getInstance();
+            if (instance == null) {
+                throw new IllegalStateException("No Hudson instance. It's like a bar without booze.");
+            }
             nodeProperties = instance.getGlobalNodeProperties();
         }
         return nodeProperties;
