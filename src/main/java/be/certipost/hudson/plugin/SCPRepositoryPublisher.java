@@ -355,7 +355,7 @@ public final class SCPRepositoryPublisher extends Notifier {
                 + message);
     }
 
-    private class consoleRunnable implements Runnable {
+    private static class consoleRunnable implements Runnable {
         private final AbstractBuild build;
         private final SCPSite scpsite;
         private final String path;
