@@ -412,8 +412,7 @@ public class SCPSite extends AbstractDescribableImpl<SCPSite> {
             SCPSite site = new SCPSite("", hostname, port, username, password, keyfile, "");
             try {
                 Session session = site.createSession(new PrintStream(System.out, true, StandardCharsets.UTF_8.name()));
-                site.closeSession(new PrintStream(System.out), session,
-                        null);
+                site.closeSession(new PrintStream(System.out, true, StandardCharsets.UTF_8), session, null);
             } catch (JSchException e) {
                 LOGGER.log(Level.SEVERE, e.getMessage(), e);
                 return FormValidation.error(e,Messages.SCPRepositoryPublisher_NotConnect());
