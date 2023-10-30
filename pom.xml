@@ -19,7 +19,7 @@
   <scm>
     <connection>scm:git:https://github.com/jenkinsci/scp-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:jenkinsci/scp-plugin.git</developerConnection>
-    <url>http://github.com/jenkins/scp-plugin</url>
+    <url>https://github.com/jenkins/scp-plugin</url>
   </scm>
 
   <properties>
